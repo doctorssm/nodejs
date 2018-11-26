@@ -4,13 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "babel src --out-dir dist && nodemon dist/app.js",
+    "start": "nodemon src/app.js --exec babel-node",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Sergii Bogush <s.bogush1@gmail.com>",
   "devDependencies": {
     "@babel/cli": "^7.1.5",
     "@babel/core": "^7.1.6",
+    "@babel/node": "^7.0.0",
     "@babel/preset-env": "^7.1.6",
     "@babel/preset-stage-2": "^7.0.0",
     "@babel/register": "^7.0.0",
