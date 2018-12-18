@@ -1,4 +1,6 @@
 const fs = require('fs');
+const csv = require('csvtojson');
+
 import {
     eventEmitter
 } from './dirwatcher'
@@ -13,7 +15,7 @@ export class Importer {
             eventEmitter.on('changed', () => {
                 fs.readFile(path, 'utf8', function (err, data) {
                     if (err) throw err;
-                    resolve(data);
+                    resolve(csv().fromString(data));
                 });
             })
         });
