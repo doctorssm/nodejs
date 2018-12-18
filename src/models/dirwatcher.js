@@ -8,26 +8,28 @@ export class DirWatcher {
     }
 
     watch(path, delay) {
-        // fs.watch(path, function (curr, prev) {
-        //     setTimeout(() => {
-        //         eventEmitter.emit('changed');
-        //     }, delay);
-        // });
-
-        let context = '';
-
-        fs.readFile(path, 'utf8', function (err, data) {
-            console.log('context == data', context == data)
-            if (context == data) {
-                return;
-            }
-
-            context = data;
-            setTimeout(() => {
+        fs.watch(path, function (curr, prev) {
+            const timer = setTimeout(() => {
                 eventEmitter.emit('changed');
             }, delay);
 
+            timer.ref();
         });
 
+        // let context = '';
+
+        // fs.readFile(path, 'utf8', function (err, data) {
+        //     console.log('context == data', context == data)
+        //     if (!context.localeCompare(data)) {
+        //         return;
+        //     }
+
+        //     context = data;
+        //     const timer = setTimeout(() => {
+        //         eventEmitter.emit('changed');
+        //     }, delay);
+
+        //     timer.ref();
+        // });
     }
 }
