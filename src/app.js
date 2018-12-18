@@ -7,6 +7,6 @@ const product = new Product();
 const dirWatcher = new DirWatcher();
 const importer = new Importer();
 
-dirWatcher.watch(__dirname + '\\data\\products.txt', 1000);
+dirWatcher.watch(__dirname + '\\data\\products.csv', 1000);
 let content = importer.import();
 
