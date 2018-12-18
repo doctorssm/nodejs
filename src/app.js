@@ -10,10 +10,10 @@ const importer = new Importer();
 const fileName = `${__dirname}\\data\\products.csv`;
 
 dirWatcher.watch(fileName, 1000);
-importer.import(fileName).then((res) => console.log('res', res))
+importer.import(fileName).then((res) => console.log('importer.import', res))
 let importSyncContent = importer.importSync(fileName);
 
-console.log('importSyncContent', importSyncContent)
+console.log('importer.importSync', importSyncContent)
 
 
 

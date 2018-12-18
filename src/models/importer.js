@@ -9,7 +9,6 @@ export class Importer {
     }
 
     import(path) {
-        console.log('[IMPORTER]: I hear a changed!');
         return new Promise((resolve, reject) => {
             eventEmitter.on('changed', () => {
                 fs.readFile(path, 'utf8', function (err, data) {
@@ -21,7 +20,6 @@ export class Importer {
     }
 
     importSync(path) {
-        console.log('[IMPORTER SYNC]: I hear a changed!');
         let content = fs.readFileSync(path).toString();
         return content;
     }
