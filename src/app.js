@@ -4,9 +4,14 @@ import { User, Product, DirWatcher, Importer } from './models';
 console.log(config.default.name);
 const user = new User();
 const product = new Product();
+
 const dirWatcher = new DirWatcher();
 const importer = new Importer();
+const fileName = `${__dirname}\\data\\products.csv`;
 
-dirWatcher.watch(__dirname + '\\data\\products.csv', 1000);
-let content = importer.import();
+dirWatcher.watch(fileName, 1000);
+importer.import(fileName).then((res) => console.log('res', res))
+importer.importSync(fileName).then((res) => console.log('res Sync', res))
+
+
 

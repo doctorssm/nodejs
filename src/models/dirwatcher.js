@@ -1,7 +1,7 @@
 const fs = require('fs');
 // var path = require("path");
-var events = require('events');
-var eventEmitter = new events.EventEmitter();
+const events = require('events');
+export const eventEmitter = new events.EventEmitter();
 
 export class DirWatcher {
     constructor() {
@@ -34,7 +34,7 @@ export class DirWatcher {
             // });
         });
     }
-
+ 
 
 }
 
