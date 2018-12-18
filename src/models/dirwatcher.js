@@ -1,40 +1,33 @@
 const fs = require('fs');
-// var path = require("path");
 const events = require('events');
 export const eventEmitter = new events.EventEmitter();
 
 export class DirWatcher {
     constructor() {
         console.log('ctor: DirWatcher');
-        eventEmitter.on('changed', this.myEventHandler);
-    }
-
-    myEventHandler() {
-        console.log('I hear a changed!');
     }
 
     watch(path, delay) {
-        console.log(path);
+        // fs.watch(path, function (curr, prev) {
+        //     setTimeout(() => {
+        //         eventEmitter.emit('changed');
+        //     }, delay);
+        // });
 
-        // let content = fs.readFileSync(path);
-        // console.log(content)
+        let context = '';
 
-       
+        fs.readFile(path, 'utf8', function (err, data) {
+            console.log('context == data', context == data)
+            if (context == data) {
+                return;
+            }
 
-        fs.watchFile(path, function (curr, prev) {
-            // on file change we can read the new xml
+            context = data;
             setTimeout(() => {
                 eventEmitter.emit('changed');
-
             }, delay);
-            // fs.readFile(path, 'utf8', function (err, data) {
-            //     if (err) throw err;
-            //     console.dir(data);
-            //     console.log('Done');
-            // });
+
         });
+
     }
- 
-
 }
-

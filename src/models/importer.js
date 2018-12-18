@@ -12,19 +12,17 @@ export class Importer {
         console.log('[IMPORTER]: I hear a changed!');
         return new Promise((resolve, reject) => {
             eventEmitter.on('changed', () => {
-                let content = fs.readFileSync(path);
-                resolve(content);
+                fs.readFile(path, 'utf8', function (err, data) {
+                    if (err) throw err;
+                    resolve(data);
+                });
             })
         });
     }
 
     importSync(path) {
         console.log('[IMPORTER SYNC]: I hear a changed!');
-        return new Promise((resolve, reject) => {
-            eventEmitter.on('changed', () => {
-                let content = fs.readFileSync(path);
-                resolve(content);
-            })
-        });
+        let content = fs.readFileSync(path).toString();
+        return content;
     }
 }
