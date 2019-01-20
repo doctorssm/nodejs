@@ -1,4 +1,19 @@
 const program = require('commander');
+// const through = require('through2');
+// const stream = through(write, end);
+
+// function write(buffer, encoding, next) {
+//     this.push('I got some data ' + buffer + '\n');
+//     console.log('write');
+//     next();
+// }
+
+// function end(done) {
+//     console.log('end');
+//     done();
+// }
+
+
 
 let args = process.argv.slice(2);
 const helpRegExp = /^(-h|--help)$/;
@@ -27,6 +42,9 @@ function handleActionOption(arg) {
         case 'reverse':
             reverse(arg);
             break;
+        case 'transform':
+            transform(arg);
+            break;
         default:
             console.log('ERROR');
     }
@@ -34,13 +52,16 @@ function handleActionOption(arg) {
 
 function reverse(str) {
     process.stdin.on('data', (data) => {
-        const reversedStr = data.toString().trim().split('').reverse().join('');
+        const reversedStr = convertBufferToString(data).split('').reverse().join('');
         process.stdout.write(`${reversedStr}\n`);
     });
 }
 
 function transform(str) {
-    console.log('transform', str);
+    process.stdin.on('data', (data) => {
+        const upperCaseStr = convertBufferToString(data).toUpperCase();
+        process.stdout.write(`${upperCaseStr}\n`);
+    });
 }
 
 function outputFile(filePath) {
@@ -64,4 +85,8 @@ function isHelpArg(arg) {
 
 function hasHelpArg(ar) {
     return ar.some((arg) => isHelpArg(arg));
+}
+
+function convertBufferToString(buffer) {
+    return buffer.toString().trim();
 }
