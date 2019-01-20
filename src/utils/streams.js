@@ -30,13 +30,15 @@ if (hasHelpArg(args) && !isHelpArg(args[0])) {
 program.version('0.1.0')
     .option('-a, --action <type>', 'action type')
     .option('-f, --file [path]', 'set the path to file')
-    .option('-p, --path [path]', 'set the path to file')
+    .option('-p, --path <path>', 'set the path to file')
 
 program.on('--help', function () {
     console.log('HELP!, SOS!');
 });
 
 program.parse(process.argv);
+
+console.log(program);
 
 if (program.action) {
     handleActionOption(program.action)
@@ -60,7 +62,7 @@ function handleActionOption(arg) {
             convertToFile(program.file);
             break;
         case 'cssBundler':
-            convertToFile(program.path);
+            cssBundler(program.path);
             break;
         default:
             console.log('ERROR');
@@ -114,6 +116,20 @@ function convertToFile(filePath) {
 }
 
 function cssBundler(path) {
+    fs.readdir(path, (err, fileNames) => {
+        if (err) {
+            // onError(err);
+            return;
+        }
+
+        fileNames.forEach((file) => {
+            console.log('fileName: ', file)
+            fs.readFile('src/styles/' + file, (err, res) => {
+                console.log('res', res)
+                fs.writeFile('src/styles/bundle.css', res, (err) => console.log('AHTUNG'));
+            });
+        })
+    });
     console.log('cssBundler ', path);
 }
 
