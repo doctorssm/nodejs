@@ -1,5 +1,6 @@
 const program = require('commander');
 const fs = require('fs');
+const csv = require('csvtojson');
 // const through = require('through2');
 // const stream = through(write, end);
 
@@ -51,6 +52,9 @@ function handleActionOption(arg) {
         case 'outputFile':
             outputFile(program.file);
             break;
+        case 'convertFromFile':
+            convertFromFile(program.file);
+            break;
         default:
             console.log('ERROR');
     }
@@ -83,7 +87,9 @@ function outputFile(filePath) {
 }
 
 function convertFromFile(filePath) {
-    console.log('convertFromFile', filePath);
+    csv().fromFile(filePath).then((res) => {
+        console.log(res);
+    });
 }
 
 function convertToFile(filePath) {
