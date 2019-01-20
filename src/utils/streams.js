@@ -30,6 +30,7 @@ if (hasHelpArg(args) && !isHelpArg(args[0])) {
 program.version('0.1.0')
     .option('-a, --action <type>', 'action type')
     .option('-f, --file [path]', 'set the path to file')
+    .option('-p, --path [path]', 'set the path to file')
 
 program.on('--help', function () {
     console.log('HELP!, SOS!');
@@ -57,6 +58,9 @@ function handleActionOption(arg) {
             break;
         case 'convertToFile':
             convertToFile(program.file);
+            break;
+        case 'cssBundler':
+            convertToFile(program.path);
             break;
         default:
             console.log('ERROR');
@@ -107,6 +111,10 @@ function convertToFile(filePath) {
     csv().fromFile(filePath).then((res) => {
         writer.write(JSON.stringify(res));
     });
+}
+
+function cssBundler(path) {
+    console.log('cssBundler ', path);
 }
 
 // HELPER FN
