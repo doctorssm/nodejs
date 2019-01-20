@@ -13,8 +13,6 @@ const program = require('commander');
 //     done();
 // }
 
-
-
 let args = process.argv.slice(2);
 const helpRegExp = /^(-h|--help)$/;
 
@@ -28,7 +26,7 @@ if (hasHelpArg(args) && !isHelpArg(args[0])) {
 }
 
 program.version('0.1.0')
-    .option('-a, --action <type>', 'action type', handleActionOption)
+    .option('-a, --action <type>', 'action type')
     .option('-f, --file [path]', 'set the path to file')
 
 program.on('--help', function () {
@@ -37,6 +35,10 @@ program.on('--help', function () {
 
 program.parse(process.argv);
 
+if (program.action) {
+    handleActionOption(program.action)
+}
+
 function handleActionOption(arg) {
     switch (arg) {
         case 'reverse':
@@ -44,6 +46,9 @@ function handleActionOption(arg) {
             break;
         case 'transform':
             transform(arg);
+            break;
+        case 'outputFile':
+            outputFile(program.file);
             break;
         default:
             console.log('ERROR');
