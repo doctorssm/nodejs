@@ -13,7 +13,7 @@ if (hasHelpArg(args) && !isHelpArg(args[0])) {
 }
 
 program.version('0.1.0')
-    .option('-a, --action <type>', 'action type')
+    .option('-a, --action <type>', 'action type', handleActionOption)
     .option('-f, --file [path]', 'set the path to file')
 
 program.on('--help', function () {
@@ -22,8 +22,21 @@ program.on('--help', function () {
 
 program.parse(process.argv);
 
+function handleActionOption(arg) {
+    switch (arg) {
+        case 'reverse':
+            reverse(arg);
+            break;
+        default:
+            console.log('ERROR');
+    }
+}
+
 function reverse(str) {
-    console.log('reverse', str);
+    process.stdin.on('data', (data) => {
+        const reversedStr = data.toString().trim().split('').reverse().join('');
+        process.stdout.write(`${reversedStr}\n`);
+    });
 }
 
 function transform(str) {
