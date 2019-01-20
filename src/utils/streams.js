@@ -55,6 +55,9 @@ function handleActionOption(arg) {
         case 'convertFromFile':
             convertFromFile(program.file);
             break;
+        case 'convertToFile':
+            convertToFile(program.file);
+            break;
         default:
             console.log('ERROR');
     }
@@ -83,7 +86,7 @@ function outputFile(filePath) {
         if (buffer) {
             process.stdout.write(convertBufferToString(buffer));
         }
-    })
+    });
 }
 
 function convertFromFile(filePath) {
@@ -93,7 +96,17 @@ function convertFromFile(filePath) {
 }
 
 function convertToFile(filePath) {
-    console.log('convertToFile', filePath);
+    if (!/csv$/.test(filePath)) {
+        console.log('Wrong file path');
+        return;
+    }
+
+    const path = filePath.replace('csv', 'json');
+    const writer = fs.createWriteStream(path);
+
+    csv().fromFile(filePath).then((res) => {
+        writer.write(JSON.stringify(res));
+    });
 }
 
 // HELPER FN
