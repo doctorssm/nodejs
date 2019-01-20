@@ -71,10 +71,14 @@ function transform(str) {
 }
 
 function outputFile(filePath) {
-    console.log('outputFile', filePath);
+    const reader = fs.createReadStream(filePath);
 
-    fs.readFile(filePath, (err, data) => {
-        console.log(data.toString())
+    reader.on('readable', () => {
+        const buffer = reader.read();
+
+        if (buffer) {
+            process.stdout.write(convertBufferToString(buffer));
+        }
     })
 }
 
