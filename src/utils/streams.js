@@ -1,19 +1,6 @@
 const program = require('commander');
 const fs = require('fs');
 const csv = require('csvtojson');
-// const through = require('through2');
-// const stream = through(write, end);
-
-// function write(buffer, encoding, next) {
-//     this.push('I got some data ' + buffer + '\n');
-//     console.log('write');
-//     next();
-// }
-
-// function end(done) {
-//     console.log('end');
-//     done();
-// }
 
 let args = process.argv.slice(2);
 const helpRegExp = /^(-h|--help)$/;
@@ -37,8 +24,6 @@ program.on('--help', function () {
 });
 
 program.parse(process.argv);
-
-console.log(program);
 
 if (program.action) {
     handleActionOption(program.action)
@@ -116,21 +101,21 @@ function convertToFile(filePath) {
 }
 
 function cssBundler(path) {
+    const writer = fs.createWriteStream(`${path}/bundle.css`);
+
     fs.readdir(path, (err, fileNames) => {
         if (err) {
-            // onError(err);
+            console.log('ERROR');
             return;
         }
 
         fileNames.forEach((file) => {
-            console.log('fileName: ', file)
-            fs.readFile('src/styles/' + file, (err, res) => {
-                console.log('res', res)
-                fs.writeFile('src/styles/bundle.css', res, (err) => console.log('AHTUNG'));
+            const pathToFile = `${path}/${file}`;
+            fs.readFile(pathToFile, (err, res) => {
+                writer.write(res + '\n');
             });
         })
     });
-    console.log('cssBundler ', path);
 }
 
 // HELPER FN
