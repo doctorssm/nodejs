@@ -3,6 +3,11 @@ const program = require('commander');
 let args = process.argv.slice(2);
 const helpRegExp = /^(-h|--help)$/;
 
+if (!args.length) {
+    console.log('No inputs found!')
+    program.outputHelp();
+}
+
 if (hasHelpArg(args) && !isHelpArg(args[0])) {
     process.argv = process.argv.filter((arg) => !isHelpArg(arg));
 }
