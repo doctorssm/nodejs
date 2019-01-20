@@ -81,13 +81,18 @@ function outputFile(filePath) {
 }
 
 function convertFromFile(filePath) {
+    if (!isFileNameValid(filePath)) {
+        console.log('Wrong file path');
+        return;
+    }
+
     csv().fromFile(filePath).then((res) => {
         console.log(res);
     });
 }
 
 function convertToFile(filePath) {
-    if (!/csv$/.test(filePath)) {
+    if (!isFileNameValid(filePath)) {
         console.log('Wrong file path');
         return;
     }
@@ -131,4 +136,9 @@ function hasHelpArg(ar) {
 
 function convertBufferToString(buffer) {
     return buffer.toString().trim();
+}
+
+function isFileNameValid(filePath) {
+    const csvRegExp = /csv$/;
+    return csvRegExp.test(filePath);
 }
