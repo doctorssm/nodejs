@@ -1,4 +1,5 @@
 const program = require('commander');
+const fs = require('fs');
 // const through = require('through2');
 // const stream = through(write, end);
 
@@ -71,6 +72,10 @@ function transform(str) {
 
 function outputFile(filePath) {
     console.log('outputFile', filePath);
+
+    fs.readFile(filePath, (err, data) => {
+        console.log(data.toString())
+    })
 }
 
 function convertFromFile(filePath) {
