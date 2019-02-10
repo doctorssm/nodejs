@@ -1,26 +1,30 @@
 const products = [{
-    productId: new Date().getTime(),
+    productId: 1,
     name: 'Product 1',
     price: 199,
-    producer: 'China'
+    producer: 'China',
+    reviews: 125
   },
   {
-    productId: new Date().getTime(),
+    productId: 2,
     name: 'Product 2',
     price: 299,
-    producer: 'China'
+    producer: 'China',
+    reviews: 356
   },
   {
-    productId: new Date().getTime(),
+    productId: 3,
     name: 'Product 3',
     price: 399,
-    producer: 'UK'
+    producer: 'UK',
+    reviews: 74
   },
   {
-    productId: new Date().getTime(),
+    productId: 4,
     name: 'Product 4',
     price: 499,
-    producer: 'Ukraine'
+    producer: 'Ukraine',
+    reviews: 258
   }
 ];
 
