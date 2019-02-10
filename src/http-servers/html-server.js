@@ -6,8 +6,16 @@ http.createServer((req, res) => {
         'Content-Type': 'text/html'
     });
 
-    const content = fs.readFileSync('./src/public/index.html').toString();
-    const parsedContent = content.replace(/{message}/, 'Hello World');
+    var readStream = fs.createReadStream('./src/public/index.html');
 
-    res.end(parsedContent);
+    readStream.on('data', (chunk) => {
+        const content = chunk.toString().replace(/{message}/, 'Hello World');
+        res.write(content)
+    });
+
+    readStream.on('error', (err) => {
+        res.end(err);
+    });
+
+    readStream.on('end', () => res.end());
 }).listen(5002);
