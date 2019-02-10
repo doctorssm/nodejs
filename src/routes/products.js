@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/api/products', (req, res) => {
+    console.log('/api/products');
     res.json({ productId: 10 });
 });
 
