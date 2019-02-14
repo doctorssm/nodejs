@@ -20,6 +20,4 @@ function getCookies(array) {
     }, {});
 }
 
-module.exports = () => {
-    return cookieParser;
-};
+module.exports = () => cookieParser;
