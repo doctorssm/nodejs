@@ -1,12 +1,18 @@
-const users = [{
+const users = [
+  {
     userId: 1,
-    firstName: 'John',
-    lastName: 'Doe'
+    firstName: "John",
+    lastname: "Doe"
   },
   {
     userId: 2,
-    firstName: 'Vasya',
-    lastName: 'Pupkin'
+    firstName: "Bob",
+    lastname: "Clark"
+  },
+  {
+    userId: 3,
+    firstName: "Amelie",
+    lastname: "Salo"
   }
 ];
 
