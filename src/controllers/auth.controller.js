@@ -1,5 +1,6 @@
 const users = require('./../data/users');
 const jwt = require('jsonwebtoken');
+const config = require('./../config/config.json');
 
 module.exports.login = (req, res) => {
   const userName = req.body.userName;
