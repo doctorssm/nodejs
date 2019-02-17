@@ -36,10 +36,15 @@ module.exports.login = (req, res) => {
   });
 
   res
-  .status(200)
-  .json({
-    userId: user.userId,
-    token
-  });
-
+    .json({
+      code: 200,
+      message: 'OK',
+      data: {
+        user: {
+          email: user.email,
+          username: user.userName
+        }
+      },
+      token
+    });
 };

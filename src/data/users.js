@@ -2,6 +2,7 @@ const users = [
   {
     userId: 1,
     userName: 'dev',
+    email: 'dev@example.com',
     firstName: "John",
     lastname: "Doe",
     password: '123'
@@ -9,6 +10,7 @@ const users = [
   {
     userId: 2,
     userName: 'test',
+    email: 'test@example.com',
     firstName: "Bob",
     lastname: "Clark",
     password: '456'
@@ -16,6 +18,7 @@ const users = [
   {
     userId: 3,
     userName: 'admin',
+    email: 'admin@example.com',
     firstName: "Amelie",
     lastname: "Salo",
     password: '789'
