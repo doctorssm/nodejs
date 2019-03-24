@@ -2,9 +2,9 @@ let jwt = require('jsonwebtoken');
 const config = require('./../config/config.json');
 
 function checkToken(req, res, next) {
-  let token = req.headers['x-access-token'] || req.headers['authorization'];
+  const token = req.headers['x-access-token'] || req.headers['authorization'];
 
-  if (token && token.startsWith('Bearer ')) {
+  if (token.startsWith('Bearer ')) {
     token = token.slice(7, token.length);
   }
 
