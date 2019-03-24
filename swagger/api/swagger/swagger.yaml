@@ -4,8 +4,8 @@ info:
     This is a sample CRM server.
   version: 1.0.0
   title: SAGA API
-host: virtserver.swaggerhub.com
-basePath: /doctorssm/CRM/1.0.0
+host: localhost:3007
+basePath: /
 tags:
 - name: orders
   description: User Orders
