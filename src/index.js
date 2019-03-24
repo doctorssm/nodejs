@@ -4,15 +4,17 @@ const cookieParser = require('./middlewares/cookie-parser');
 const queryParser = require('./middlewares/query-parser');
 const productRouter = require('./routes/products');
 const userRouter = require('./routes/users');
+const authRouter = require('./routes/auth');
 
 const port = process.env.PORT || 8080;
 
 app.use(express.json());
 
-app.use(cookieParser());
+// app.use(cookieParser());
 app.use(queryParser());
 
 app.use(productRouter);
 app.use(userRouter);
+app.use(authRouter);
 
 app.listen(port, () => console.log(`App listening on port ${port}!`));
