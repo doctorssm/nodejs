@@ -4,7 +4,7 @@ info:
     This is a sample CRM server.
   version: 1.0.0
   title: SAGA API
-host: localhost:3007
+host: localhost:10010
 basePath: /
 tags:
 - name: orders
